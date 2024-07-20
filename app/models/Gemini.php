@@ -1,12 +1,12 @@
 <?php
 
-class Gemini extends Controller {
-
-    public function index() {
-      $user = $this->model('User');
-      $data = $user->test();
-
-      $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=".$_ENV['GEMINI'];
+class Gemini {
+    private $GEMINI_KEY;
+    public function __construct() {
+      $this->GEMINI_KEY = $_ENV['GEMINI_KEY'];
+    }
+    public function generate_review($movie_title, $rating) {
+      $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=" . $this->GEMINI_KEY;
 
       $data = array(
         "contents" => array(
@@ -15,7 +15,7 @@ class Gemini extends Controller {
             "parts" => array(
               array(
                 // Echo this to the screen of our movie controller in that view.
-                "text" => 'Please give a review of Barbie from someone who rated it a 4 out of 5.'
+                "text" => "Please give a review of {$movie_title} from someone who rated it a {$rating} out of 5."
               )
             )
           )
@@ -34,9 +34,8 @@ class Gemini extends Controller {
         echo 'Curl error: ' . curl_error($ch);
       }
 
-      echo "<pre>";
-      echo $response;
-      die;
+      $result = json_decode($response, true);
+      return $result['candidates'][0]['content']['parts'][0]['text'] ?? "Error in review generation.";
     }
 
 }
