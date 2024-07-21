@@ -34,10 +34,21 @@
   <p>No data is available for this movie.</p>
 <?php endif; ?>
 <br>
-<h2>Get Review</h2>
+<h2>Get an AI-generated Review</h2>
 <form action="/movie/review" method="POST">
     <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>">
-    <input name="rating" type="hidden" value="4">
-    <button type="submit" class="btn btn-dark">Get Review</button>
+    <div class="form-group">
+      <label for="review-rating">Rating for Review:</label>
+      <select class="form-select" name="rating" id="review-rating" required>
+        <option value="">Select rating</option>
+        <option value="1">1 Star</option>
+        <option value="2">2 Stars</option>
+        <option value="3">3 Stars</option>
+        <option value="4">4 Stars</option>
+        <option value="5">5 Stars</option>
+      </select>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-dark">Get a Review</button>
 </form>
 <?php require_once 'app/views/templates/footer.php'?>
