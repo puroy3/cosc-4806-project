@@ -1,7 +1,17 @@
 <?php
 
 class Movie extends Controller {
-
+  public function __construct() {
+    $public_methods = ['index', 'search'];
+    if(!in_array(!$this->getMethod(), $public_methods) && !isset($_SESSION['auth'])) {
+      header('Location: /login');
+      exit;
+    }
+  }
+  private function getMethod() {
+    $url = isset($_GET['url']) ? explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL)) : ['index'];
+    return isset($url[1]) ? $url[1] : 'index';
+  }
   public function index() {
     $this->view('movie/index');
   }
@@ -22,6 +32,11 @@ class Movie extends Controller {
   }
 
   public function rate($movie_title = '', $rating = '') {
+    if(!isset($_SESSION['auth'])) {
+      $_SESSION['redirect'] = "/movie/rate/$movie_title/$rating";
+      header('Location: /login');
+      exit;
+    }
     if (!in_array($rating, ['1', '2', '3', '4', '5'])) {
       $_SESSION['error'] = "Rating must be between 1 and 5, please try again.";
       header('Location: /movie/search?movie=' . urlencode($movie_title));
