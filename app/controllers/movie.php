@@ -9,9 +9,8 @@ class Movie extends Controller {
 
   public function search() {
     if(!isset($_REQUEST['movie'])) {
-      // redirect to /movie
-      header('Location: /movie');
-      exit;
+      $this->view('movie/index');
+      return;
     }
     
     $omdb = $this->model('Omdb');
@@ -19,9 +18,13 @@ class Movie extends Controller {
     $movie_title = $_REQUEST['movie'];
     $movie = $omdb->search_movie($movie_title);
 
-    $this->view('movie/results', ['movie' => $movie]);
+    if(isset($movie['Response']) && $movie['Response'] === 'True' && $movie) {
+      $this->view('movie/result', ['movie' => $movie]);
+    }
+    else {
+      $this->view('movie/index', ['error' => 'The movie was not found']);
+    }
   }
-
   public function rate($movie_title = '', $rating = '') {
     if(!isset($_SESSION['auth'])) {
       $_SESSION['redirect'] = "/movie/rate/$movie_title/$rating";

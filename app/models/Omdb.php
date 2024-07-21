@@ -9,9 +9,8 @@ class Omdb {
 
     public function search_movie($title) {
       $query_url = "http://www.omdbapi.com/?apikey=". $this->omdb_key ."&t=" . urlencode($title);
-      $json = file_get_contents($query_url);
-      $phpObj = json_decode($json, true);
-      return $phpObj;
+      $response = file_get_contents($query_url);
+      return json_decode($response, true);
     }
 
 }

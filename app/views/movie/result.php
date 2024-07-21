@@ -7,8 +7,7 @@
 <?php if (isset($_SESSION['auth'])): ?>
 <h2>Rate this movie</h2>
 <form action="/movie/rate" method="POST">
-  <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>"
-    <div>
+  <input type="hidden" name="movie_name" value="<?= htmlspecialchars($data['movie']['Title'])?>"
       <select class="form-select" name="rating" required>
         <option value="">Select rating</option>
         <option value="1">1 Star</option>
@@ -17,12 +16,12 @@
         <option value="4">4 Stars</option>
         <option value="5">5 Stars</option>
       </select>
-    </div>
   <button type="submit" class="btn btn-dark">Submit Rating</button>
 </form>
 <?php else: ?>
-  <p>Login to rate movies.</p>
+  <p><a href="/login">Login</a> to rate movies.</p>
 <?php endif; ?>
+<a href="/movie" class="btn btn-dark">Return to Movie Search</a>
 <h2>Get Review</h2>
 <form action="/movie/getReview" method="POST">
   <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>">
