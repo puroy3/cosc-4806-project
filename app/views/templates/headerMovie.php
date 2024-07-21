@@ -16,7 +16,13 @@
       <a class="navbar-brand" href="/movies">Movie Search</a>
       <div class="navbar-nav">
         <a class="nav-link" href="/movies">Search</a>
-        <a class="nav-link" href="/movies/ratings">Your Ratings</a>
+        <?php if (isset($_SESSION['auth'])): ?>
+          <a class="nav-link" href="/movies/ratings">Your Ratings</a>
+          <a class="nav-link" href="/logout">Logout</a>
+        <?php else: ?>
+          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/create">Signup</a>
+        <?php endif; ?>
       </div>
     </div>
 </nav>
