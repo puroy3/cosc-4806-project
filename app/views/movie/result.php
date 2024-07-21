@@ -8,16 +8,16 @@
   <div class="col-md-7">
     <p>Year: <?= htmlspecialchars($data['movie']['Year'])?></p>
     <p>Released: <?= htmlspecialchars($data['movie']['Released'])?></p>
-    <p>Director: <?= htmlspecialchars($data['movie']['Director'])?></p>
-    <p>Writer: <?= htmlspecialchars($data['movie']['Writer'])?></p>
-    <p>Actors: <?= htmlspecialchars($data['movie']['Actors'])?></p>
+    <p>Director(s): <?= htmlspecialchars($data['movie']['Director'])?></p>
+    <p>Writer(s): <?= htmlspecialchars($data['movie']['Writer'])?></p>
+    <p>Actor(s): <?= htmlspecialchars($data['movie']['Actors'])?></p>
     <p>Rated: <?= htmlspecialchars($data['movie']['Rated'])?></p>
     <p>Runtime: <?= htmlspecialchars($data['movie']['Runtime'])?></p
-    <p>Genre: <?= htmlspecialchars($data['movie']['Genre'])?></p>
+    <p>Genre(s): <?= htmlspecialchars($data['movie']['Genre'])?></p>
     <p>Countries: <?= htmlspecialchars($data['movie']['Country'])?></p>
-    <p>Language: <?= htmlspecialchars($data['movie']['Language'])?></p>
-    <p>Awards: <?= htmlspecialchars($data['movie']['Awards'])?></p>
-    <p>Box Office: <?= htmlspecialchars($data['movie']['BoxOffice']) ?></p>
+    <p>Language(s): <?= htmlspecialchars($data['movie']['Language'])?></p>
+    <p>Award(s): <?= htmlspecialchars($data['movie']['Awards'])?></p>
+    <p>Box Office Amount: <?= htmlspecialchars($data['movie']['BoxOffice']) ?></p>
     <p>Plot Summary: <?= htmlspecialchars($data['movie']['Plot'])?></p>
     <h3>Ratings</h3>
     <?php if (isset($data['movie']['Ratings']) && is_array($data['movie']['Ratings'])): ?>
@@ -61,11 +61,11 @@
   <input type="hidden" name="movie_name" value="<?= htmlspecialchars($data['movie']['Title'])?>">
       <select class="form-select" name="rating" required>
         <option value="">Select rating</option>
-        <option value="1">1 Star</option>
-        <option value="2">2 Stars</option>
-        <option value="3">3 Stars</option>
-        <option value="4">4 Stars</option>
-        <option value="5">5 Stars</option>
+        <option value="1">⭐☆☆☆☆ (1/5)</option>
+        <option value="2">⭐⭐☆☆☆ (2/5)</option>
+        <option value="3">⭐⭐⭐☆☆ (3/5)</option>
+        <option value="4">⭐⭐⭐⭐☆ (4/5)</option>
+        <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
       </select>
   <br>
   <button type="submit" class="btn btn-dark">Submit Rating</button>
