@@ -53,7 +53,7 @@ class Movie extends Controller {
     else {
       $_SESSION['error'] = "The rating was not saved!";
     }
-    header('Location: /movie/search?movie=' . urlencode($movie_name) . '/' . $rating);
+    header('Location: /movie');
     exit;
   }
     

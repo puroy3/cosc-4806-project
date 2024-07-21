@@ -1,12 +1,4 @@
 <?php require_once 'app/views/templates/headerMovie.php'?>
-<?php if (isset($_SESSION['success'])): ?>
-  <div class="alert alert-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
-  <?php unset($_SESSION['success']); ?>
-<?php endif; ?>
-<?php if (isset($_SESSION['error'])): ?>
-  <div class="alert alert-danger"><?= htmlspecialchars($_SESSION['error']) ?></div>
-  <?php unset($_SESSION['error']); ?>
-<?php endif; ?>
 <?php if (isset($data['movie']) && is_array($data['movie'])): ?>
 <h1><?= htmlspecialchars($data['movie']['Title'])?></h1>
 <img src="<?= htmlspecialchars($data['movie']['Poster'])?>" alt="Movie Poster" class="img-fluid">
