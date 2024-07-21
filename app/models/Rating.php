@@ -2,9 +2,30 @@
 class Rating {
   public function saveRating($userId, $movieName, $rating) {
     $db = db_connect();
+    try {
+      // Check to see if a rating already exixts in the database.
+      $checkStatement = $db->prepare("select id from ratings where user_id = :userId and movie_name = 
+ :movieName");
+      $checkStatement->execute([':userId' => $userId, ':movieName' => $movieName]);
+      $existingRating = $checkStatement->fetch(PDO::FETCH_ASSOC);
+      // Update the existing user rating.
+      if ($existingRating) {
+       $statement = $db->prepare("update ratings set rating = :rating where id = :id");
+       $statement->execute([':rating' => $rating, ':id' => $existingRating['id']]);
+      }
+      else {
+        // Insert a new user rating.
     $statement = $db->prepare("insert into ratings (user_id, movie_name, rating) values (:userId, :movieName, :rating)");
     return $statement->execute([':userId' => $userId, ':movieName' => $movieName, ':rating' => $rating]);
   }
+  return true;
+}
+catch(PDOException $exception) {
+  // Display error.
+  echo "Error in saving the rating: " . $exception->getMessage();
+  return false;
+  }
+}
   public function getUserRatings($userId) {
     $db = db_connect();
     $statement = $db->prepare("select * from ratings where user_id = :userId");

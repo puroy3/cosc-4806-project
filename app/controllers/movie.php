@@ -44,7 +44,7 @@ class Movie extends Controller {
     $movie_name = $_POST['movie_name'] ?? '';
     $rating = $_POST['rating'] ?? '';
     if (!in_array($rating, ['1', '2', '3', '4', '5']) || empty($movie_name) || empty($rating)) {
-      $_SESSION['error'] = "Rating must be between 1 and 5, please try again.";
+      $_SESSION['error'] = "Rating must be between 1 and 5, please try again. The movie name or rating cannot be blank.";
       header('Location: /movie');
       exit;
     }
