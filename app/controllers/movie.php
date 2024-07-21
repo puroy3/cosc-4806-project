@@ -22,7 +22,10 @@ class Movie extends Controller {
     $movie = $omdb->search_movie($movie_title);
 
     if(isset($movie['Response']) && $movie['Response'] === 'True' && $movie) {
-      $this->view('movie/result', ['movie' => $movie]);
+      // Get the user ratings for the specific movie.
+      $rating_model = $this->model('Rating');
+      $user_ratings = $rating_model->getMovieRatings($movie['Title']);
+      $this->view('movie/result', ['movie' => $movie, 'user_ratings' => $user_ratings]);
     }
     else {
       $this->view('movie/index', ['error' => 'The movie was not found']);

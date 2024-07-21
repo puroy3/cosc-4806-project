@@ -7,16 +7,16 @@
 </div>
   <div class="col-md-7">
     <p>Year: <?= htmlspecialchars($data['movie']['Year'])?></p>
-    <p>Released:</p> <?= htmlspecialchars($data['movie']['Released'])?></p>
+    <p>Released: <?= htmlspecialchars($data['movie']['Released'])?></p>
     <p>Director: <?= htmlspecialchars($data['movie']['Director'])?></p>
-    <p>Writer:</p> <?= htmlspecialchars($data['movie']['Writer'])?></p>
-    <p>Actors:</p> <?= htmlspecialchars($data['movie']['Actors'])?></p>
-    <p>Rated:</p> <?= htmlspecialchars($data['movie']['Rated'])?></p>
-    <p>Runtime:</p> <?= htmlspecialchars($data['movie']['Runtime'])?></p
-    <p>Genre:</p> <?= htmlspecialchars($data['movie']['Genre'])?></p>
-    <p>Countries:</p> <?= htmlspecialchars($data['movie']['Country'])?></p>
-    <p>Language:</p> <?= htmlspecialchars($data['movie']['Language'])?></p>
-    <p>Awards:</p> <?= htmlspecialchars($data['movie']['Awards'])?></p>
+    <p>Writer: <?= htmlspecialchars($data['movie']['Writer'])?></p>
+    <p>Actors: <?= htmlspecialchars($data['movie']['Actors'])?></p>
+    <p>Rated: <?= htmlspecialchars($data['movie']['Rated'])?></p>
+    <p>Runtime: <?= htmlspecialchars($data['movie']['Runtime'])?></p
+    <p>Genre: <?= htmlspecialchars($data['movie']['Genre'])?></p>
+    <p>Countries: <?= htmlspecialchars($data['movie']['Country'])?></p>
+    <p>Language: <?= htmlspecialchars($data['movie']['Language'])?></p>
+    <p>Awards: <?= htmlspecialchars($data['movie']['Awards'])?></p>
     <p>Box Office: <?= htmlspecialchars($data['movie']['BoxOffice']) ?></p>
     <p>Plot Summary: <?= htmlspecialchars($data['movie']['Plot'])?></p>
     <h3>Ratings</h3>
@@ -29,6 +29,32 @@
   <?php endif; ?>
   </div>
 </div>
+<h3>User Ratings</h3>
+<?php if (!empty($data['user_ratings'])): ?>
+  <ul class="list-group">
+    <?php foreach ($data['user_ratings'] as $rating): ?>
+      <li class="list-group-item">
+        <?= htmlspecialchars($rating['username'])?>: 
+        <?= str_repeat('⭐', $rating['rating']) . str_repeat('☆', 5 - $rating['rating']) ?>
+        (<?= $rating['rating'] ?>/5)
+      </li>
+    <?php endforeach; ?>
+  </ul>
+  <?php else: ?>
+  <p>No user ratings available.</p>
+  <?php endif; ?>
+  <br>
+  <p>Average User Rating:
+  <?php
+    if(!empty($data['user_ratings'])) {
+      $average = array_sum(array_column($data['user_ratings'], 'rating')) / count($data['user_ratings']);
+      echo number_format($average, 1) . '/5';
+    }
+    else {
+      echo 'N/A';
+    }
+    ?>
+  </p>
 <?php if (isset($_SESSION['auth'])): ?>
 <h2>Rate this movie</h2>
 <form action="/movie/rate" method="POST">
