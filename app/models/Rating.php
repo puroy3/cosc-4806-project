@@ -7,7 +7,7 @@ class Rating {
   }
   public function getUserRatings($userId) {
     $db = db_connect();
-    $statement = $db->prepare("select * from ratings where user_id = :userId");
+    $statement = $db->prepare("select * from ratings where user_id = :userI");
     $statement->execute();
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
