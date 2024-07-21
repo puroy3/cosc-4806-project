@@ -2,16 +2,7 @@
 
 class Movie extends Controller {
   public function __construct() {
-    $public_methods = ['index', 'search'];
-    if(!in_array(!$this->getMethod(), $public_methods) && !isset($_SESSION['auth'])) {
-      header('Location: /login');
-      exit;
     }
-  }
-  private function getMethod() {
-    $url = isset($_GET['url']) ? explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL)) : ['index'];
-    return isset($url[1]) ? $url[1] : 'index';
-  }
   public function index() {
     $this->view('movie/index');
   }
@@ -68,6 +59,10 @@ class Movie extends Controller {
     $this->view('movie/review', ['movie_title' => $movie_title, 'rating' => $rating, 'review' => $review]);
   }
   public function ratings() {
+    if(!isset($_SESSION['auth'])) {
+      header('Location: /login');
+      exit;
+    }
     $user_id = $_SESSION['user_id'] ?? 0;
     $rating_model = $this->model('Rating');
     $ratings = $rating_model->getUserRatings($user_id);

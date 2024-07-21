@@ -5,5 +5,5 @@
     <?= n12br(htmlspecialchars($data['review']))?>
 </div>
 </div>
-<a href="/movies" class="btn btn-dark">Return to Search</a>
+<a href="/movie" class="btn btn-dark">Return to Search</a>
 <?php require_once 'app/views/templates/footer.php'?>

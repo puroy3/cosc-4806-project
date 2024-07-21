@@ -6,7 +6,7 @@
 <p>Plot Summary: <?= htmlspecialchars($data['movie']['Plot']?></p>
 <?php if (isset($_SESSION['auth'])): ?>
 <h2>Rate this movie</h2>
-<form action="/movies/rate" method="POST">
+<form action="/movie/rate" method="POST">
   <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>"
     <div>
       <select class="form-select" name="rating" required>
@@ -24,7 +24,7 @@
   <p>Login to rate movies.</p>
 <?php endif; ?>
 <h2>Get Review</h2>
-<form action="/movies/getReview" method="POST">
+<form action="/movie/getReview" method="POST">
   <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>">
     <button type="submit" class="btn btn-dark">Get Review</button>
 </form>
