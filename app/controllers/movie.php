@@ -42,7 +42,7 @@ class Movie extends Controller {
       header('Location: /movie/search?movie=' . urlencode($movie_title));
       exit;
     }
-    $user_id = $_SESSION['user_id'] ?? 0;
+    $user_id = $_SESSION['user_id'];
     $rating_model = $this->model('Rating');
     $rating_model->saveRating($user_id, $movie_title, $rating);
     $_SESSION['success'] = "The rating was saved successfully!";

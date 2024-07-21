@@ -1,4 +1,4 @@
-<?php require_once 'app/views/templates/headerPublic.php'?>
+<?php require_once 'app/views/templates/headerMovie.php'?>
 <main role="main" class="container">
     <div class="page-header" id="banner">
         <div class="row">

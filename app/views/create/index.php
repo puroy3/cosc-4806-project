@@ -1,4 +1,4 @@
-<?php require_once 'app/views/templates/headerPublic.php'?>
+<?php require_once 'app/views/templates/headerMovie.php'?>
 <!DOCTYPE html>
 <html>
   <head>
