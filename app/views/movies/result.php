@@ -4,6 +4,7 @@
 <p>Year: <?= htmlspecialchars($data['movie']['Year']?></p>
 <p>Director: <?= htmlspecialchars($data['movie']['Director']?></p>
 <p>Plot Summary: <?= htmlspecialchars($data['movie']['Plot']?></p>
+<?php if (isset($_SESSION['auth'])): ?>
 <h2>Rate this movie</h2>
 <form action="/movies/rate" method="POST">
   <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>"
@@ -19,6 +20,9 @@
     </div>
   <button type="submit" class="btn btn-dark">Submit Rating</button>
 </form>
+<?php else: ?>
+  <p>Login to rate movies.</p>
+<?php endif; ?>
 <h2>Get Review</h2>
 <form action="/movies/getReview" method="POST">
   <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>">
