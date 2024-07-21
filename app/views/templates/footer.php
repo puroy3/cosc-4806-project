@@ -2,7 +2,6 @@
     <div class="row">
         <div class="col-lg-12">
             <p class="text-center">Pushpak Roy Copyright &copy; <?php echo date('Y'); ?> </p>
-            <p class="text-center"><a href="/home"> Return to Home </a></p>
         </div>
     </div>
 </footer>

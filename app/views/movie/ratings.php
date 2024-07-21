@@ -1,5 +1,8 @@
 <?php require_once 'app/views/templates/headerMovie.php'?>
 <h1>Your Ratings</h1>
+<?php if (empty($data['ratings'])): ?>
+  <p>You have not rated any movies.</p>
+<?php else: ?>
 <table class="table">
   <thead>
     <tr>
@@ -16,4 +19,6 @@
     <?php }; ?>
   </tbody>
 </table>
+  <?php endif; ?>
+
 <?php require_once 'app/views/templates/footer.php'?>
