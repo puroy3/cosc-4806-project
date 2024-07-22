@@ -1,34 +1,52 @@
 <?php require_once 'app/views/templates/headerMovie.php'?>
 <?php if (isset($data['movie']) && is_array($data['movie'])): ?>
 <h1 class="text-center"><?= htmlspecialchars($data['movie']['Title'])?> (<?= htmlspecialchars($data['movie']['Year']) ?>)</h1>
+<div class="container">
 <div class="row">
   <div class="col-md-3">
-    <img src="<?= htmlspecialchars($data['movie']['Poster'])?>" alt="Movie Poster" class="img-fluid">
+    <img src="<?= htmlspecialchars($data['movie']['Poster'])?>" alt="Movie Poster" class="img-fluid rounded shadow">
 </div>
   <div class="col-md-7">
-    <p>Year: <?= htmlspecialchars($data['movie']['Year'])?></p>
-    <p>Released: <?= htmlspecialchars($data['movie']['Released'])?></p>
-    <p>Director(s): <?= htmlspecialchars($data['movie']['Director'])?></p>
-    <p>Writer(s): <?= htmlspecialchars($data['movie']['Writer'])?></p>
-    <p>Actor(s): <?= htmlspecialchars($data['movie']['Actors'])?></p>
-    <p>Rated: <?= htmlspecialchars($data['movie']['Rated'])?></p>
-    <p>Runtime: <?= htmlspecialchars($data['movie']['Runtime'])?></p
-    <p>Genre(s): <?= htmlspecialchars($data['movie']['Genre'])?></p>
-    <p>Countries: <?= htmlspecialchars($data['movie']['Country'])?></p>
-    <p>Language(s): <?= htmlspecialchars($data['movie']['Language'])?></p>
-    <p>Award(s): <?= htmlspecialchars($data['movie']['Awards'])?></p>
-    <p>Box Office Amount: <?= htmlspecialchars($data['movie']['BoxOffice']) ?></p>
-    <p>Plot Summary: <?= htmlspecialchars($data['movie']['Plot'])?></p>
-    <h3>Ratings</h3>
+    <div class="card shadow">
+      <div class="card-body">
+        <h3 class="text-center" class="card-title">Details of the Movie</h3>
+        <div class="row">
+          <div class="col-md-5">
+    <p><strong>Year:</strong> <?= htmlspecialchars($data['movie']['Year'])?></p>
+    <p><strong>Released:</strong> <?= htmlspecialchars($data['movie']['Released'])?></p>
+    <p><strong>Director(s):</strong> <?= htmlspecialchars($data['movie']['Director'])?></p>
+    <p><strong>Writer(s):</strong> <?= htmlspecialchars($data['movie']['Writer'])?></p>
+    <p><strong>Actor(s):</strong> <?= htmlspecialchars($data['movie']['Actors'])?></p>
+    <p><strong>Rated:</strong> <?= htmlspecialchars($data['movie']['Rated'])?></p>
+          </div>
+          <div class="col-md-5">
+    <p><strong>Runtime:</strong> <?= htmlspecialchars($data['movie']['Runtime'])?></p
+    <p><strong>Genre(s):</strong> <?= htmlspecialchars($data['movie']['Genre'])?></p>
+    <p><strong>Countries:</strong> <?= htmlspecialchars($data['movie']['Country'])?></p>
+    <p><strong>Language(s):</strong> <?= htmlspecialchars($data['movie']['Language'])?></p>
+    <p><strong>Award(s):</strong> <?= htmlspecialchars($data['movie']['Awards'])?></p>
+    <p><strong>Box Office Amount:</strong> <?= htmlspecialchars($data['movie']['BoxOffice']) ?></p>
+          </div>
+        </div>
+    <p><strong>Plot Summary: </strong><?= htmlspecialchars($data['movie']['Plot'])?></p>
+      </div>
+    </div>
+    <div class="card shadow">
+      <div class="card-body">
+    <h3 class="text-center" class="card-title">Online Ratings</h3>
     <?php if (isset($data['movie']['Ratings']) && is_array($data['movie']['Ratings'])): ?>
-      <ul>
+      <ul class="list-group list-group-flush">
         <?php foreach ($data['movie']['Ratings'] as $rating): ?>
-          <li><?= htmlspecialchars($rating['Source']) ?>: <?= htmlspecialchars($rating['Value']) ?></li>
+          <li class="list-group-item d-flex align-items-center justify-content-between"><?= htmlspecialchars($rating['Source']) ?> <span class="badge bg-dark"><?= htmlspecialchars($rating['Value']) ?></span></li>
         <?php endforeach; ?>
       </ul>
   <?php endif; ?>
   </div>
 </div>
+  </div>
+</div>
+</div>
+  <br>
 <h3 class="text-center">User Ratings</h3>
 <div class="container">
   <div class="row justify-content-center">
@@ -49,7 +67,7 @@
 </div>
   <br>
   <div class="text-center">
-  <p>Average User Rating:
+  <p><strong>Average User Rating:</strong>
   <?php
     if(!empty($data['user_ratings'])) {
       $average = array_sum(array_column($data['user_ratings'], 'rating')) / count($data['user_ratings']);
@@ -83,7 +101,7 @@
   <p class="text-center"><a href="/login">Login</a> to rate movies.</p>
 <?php endif; ?>
 <br>
-<h2 class="text-center">Get an AI-generated Review</h2>
+<h2 class="text-center">Get an AI-generated Review for this Movie</h2>
 <form action="/movie/review" method="POST">
     <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>">
     <div class="form-group">
