@@ -59,13 +59,10 @@ class Movie extends Controller {
     header('Location: /movie');
     exit;
   }
-    
     /*COSC Project
       movie[search...]
     [SEARCH BUTTON]
     */
-    // Just a link, not a form. Grab barbie as parameter 1, and grab 1 as parameter 2, make sure that the number value is correct (not decimal, not a letter, not above 5, not below 1), put that into the database (username, session variable, movie name, and rating), the username is tracked by a session variable. Alternatively use bootstrap for getting reviews, could use a javascript library to get ratings.
-
   public function review() {
     if($_SERVER['REQUEST_METHOD'] !== 'POST') {
       header('Location: /movie');
@@ -91,5 +88,10 @@ class Movie extends Controller {
     $rating_model = $this->model('Rating');
     $ratings = $rating_model->getUserRatings($user_id);
     $this->view('movie/ratings', ['ratings' => $ratings]);
+  }
+  public function allRatings() {
+    $rating_model = $this->model('Rating');
+    $every_rating = $rating_model->getAllRatings();
+    $this->view('movie/every_rating', ['ratings' => $every_rating]);
   }
 }

@@ -33,6 +33,9 @@ function setActive($page) {
           <li class="nav-item">
             <a class="nav-link <?= setActive('movie')?>" href="/movie">Movie Search</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/movie/allRatings">All User Ratings</a>
+          </li>
           <?php if ($isAuthenticated): ?>
               <li class="nav-item">
                 <a class="nav-link <?= setActive('home')?>" href="/home">Home</a>

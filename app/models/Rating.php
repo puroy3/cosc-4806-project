@@ -28,7 +28,7 @@ catch(PDOException $exception) {
 }
   public function getUserRatings($userId) {
     $db = db_connect();
-    $statement = $db->prepare("select * from ratings where user_id = :userId");
+    $statement = $db->prepare("select movie_name, rating, created_at from ratings where user_id = :userId order by created_at desc");
     $statement->execute([':userId' => $userId]);
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
@@ -37,6 +37,16 @@ catch(PDOException $exception) {
     $db = db_connect();
     $statement = $db->prepare("select ratings.rating, users.username from ratings join users on ratings.user_id = users.id where movie_name = :movieName order by ratings.created_at desc");
     $statement->execute([':movieName' => $movieName]);
+    $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+  }
+  // Create getallratings function.
+  public function getAllRatings() {
+    // Connect to database
+    $db = db_connect();
+    // Select id, username, movie name, created at time and execute then fetch and return.
+    $statement = $db->prepare("select ratings.id, users.username, ratings.movie_name, ratings.rating, ratings.created_at from ratings join users on ratings.user_id = users.id order by ratings.created_at desc");
+    $statement->execute();
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
   }
