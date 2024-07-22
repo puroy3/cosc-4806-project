@@ -3,6 +3,7 @@
 <?php if (empty($data['ratings'])): ?>
   <p class="text-center">You have not rated any movies.</p>
 <?php else: ?>
+  <!--Create table for ratings.-->
 <div class="table-responsive">
 <table class="table">
   <thead>

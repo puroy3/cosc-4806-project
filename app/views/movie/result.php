@@ -4,11 +4,13 @@
 <div class="container">
 <div class="row">
   <div class="col-md-3">
+    <!--Display movie poster.-->
     <img src="<?= htmlspecialchars($data['movie']['Poster'])?>" alt="Movie Poster" class="img-fluid rounded shadow">
 </div>
   <div class="col-md-7">
     <div class="card shadow">
       <div class="card-body">
+        <!--Display the movie details using cards.-->
         <h3 class="text-center" class="card-title">Details of the Movie</h3>
         <div class="row">
           <div class="col-md-5">
@@ -33,6 +35,7 @@
     </div>
     <div class="card shadow">
       <div class="card-body">
+        <!--Display online ratings.-->
     <h3 class="text-center" class="card-title">Online Ratings</h3>
     <?php if (isset($data['movie']['Ratings']) && is_array($data['movie']['Ratings'])): ?>
       <ul class="list-group list-group-flush">
@@ -47,6 +50,7 @@
 </div>
 </div>
   <br>
+  <!--Display user ratings.-->
 <h3 class="text-center">User Ratings</h3>
 <div class="container">
   <div class="row justify-content-center">
@@ -67,6 +71,7 @@
 </div>
   <br>
   <div class="text-center">
+    <!--Display average user rating.-->
   <p><strong>Average User Rating:</strong>
   <?php
     if(!empty($data['user_ratings'])) {
@@ -80,6 +85,7 @@
   </p>
   </div>
 <?php if (isset($_SESSION['auth'])): ?>
+      <!--Get the user to rate this movie using radio buttons.-->
 <h2 class="text-center">Rate this movie</h2>
 <form action="/movie/rate" method="POST">
   <input type="hidden" name="movie_name" value="<?= htmlspecialchars($data['movie']['Title'])?>">
@@ -105,6 +111,7 @@
 <form action="/movie/review" method="POST">
     <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>">
     <div class="form-group">
+      <!--Use dropdown menu for choosing rating for ai-generated review.-->
       <label for="review-rating">Rating for Review:</label>
       <select class="form-select" name="rating" id="review-rating" required>
         <option value="">Select a rating</option>

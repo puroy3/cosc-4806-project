@@ -1,6 +1,7 @@
 <?php require_once 'app/views/templates/headerMovie.php'?>
 <h2 class="text-center">Every Movie Rating by Username</h2>
 <?php if (!empty($data['ratings'])): ?>
+  <!--Create table for all ratings.-->
   <div class="table-responsive">
     <table class="table">
       <thead class="table">

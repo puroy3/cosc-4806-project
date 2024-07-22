@@ -1,5 +1,6 @@
 <?php
 class Rating {
+  // Save rating function.
   public function saveRating($userId, $movieName, $rating) {
     $db = db_connect();
     try {
@@ -26,15 +27,19 @@ catch(PDOException $exception) {
   return false;
   }
 }
+  // getUserRatings function.
   public function getUserRatings($userId) {
     $db = db_connect();
+    // Select movie name, rating and created at and display to user.
     $statement = $db->prepare("select movie_name, rating, created_at from ratings where user_id = :userId order by created_at desc");
     $statement->execute([':userId' => $userId]);
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $rows;
   }
+  // Get movie ratings function to display on specific movies.
   public function getMovieRatings($movieName) {
     $db = db_connect();
+    // Display only the username and rating.
     $statement = $db->prepare("select ratings.rating, users.username from ratings join users on ratings.user_id = users.id where movie_name = :movieName order by ratings.created_at desc");
     $statement->execute([':movieName' => $movieName]);
     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);

@@ -1,4 +1,5 @@
 <?php require_once 'app/views/templates/headerMovie.php'?>
+<!--Display success or failure of ratings.-->
 <?php if (isset($_SESSION['success'])): ?>
   <div class="alert alert-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
   <?php unset($_SESSION['success']); ?>
@@ -12,6 +13,7 @@
   <div class="alert alert-danger"><?= htmlspecialchars($data['error'])?></div>
 <?php endif; ?>
 <form action="/movie/search" method="POST">
+  <!--Movie Search view-->
   <div class="form-group">
     <input name="movie" class="form-control" type="text" placeholder="Movie Name" required>
   </div>

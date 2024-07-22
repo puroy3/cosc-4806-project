@@ -30,12 +30,14 @@ function setActive($page) {
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!--Allow all users to access Movie Search, All User Ratings, Login and Signup.-->
           <li class="nav-item">
             <a class="nav-link <?= setActive('movie')?>" href="/movie">Movie Search</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/movie/allRatings">All User Ratings</a>
           </li>
+          <!--Allow only logged in users to access home, your ratings, and logout.-->
           <?php if ($isAuthenticated): ?>
               <li class="nav-item">
                 <a class="nav-link <?= setActive('home')?>" href="/home">Home</a>
@@ -59,6 +61,7 @@ function setActive($page) {
     </div>
 </nav>
 <div class="container">
+  <!--Added breadcrumbs.-->
   <?php 
   require_once 'app/views/components/breadcrumb.php';
   $itemsForBreadcrumb = [

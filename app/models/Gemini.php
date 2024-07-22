@@ -2,9 +2,11 @@
 
 class Gemini {
     private $GEMINI_KEY;
+    // Construct to input gemini key.
     public function __construct() {
       $this->GEMINI_KEY = $_ENV['GEMINI_KEY'];
     }
+  // Generate a review using gemini and their provided code.
     public function generate_review($movie_title, $rating) {
       $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=" . $this->GEMINI_KEY;
 
@@ -14,14 +16,14 @@ class Gemini {
             "role" => "user",
             "parts" => array(
               array(
-                // Echo this to the screen of our movie controller in that view.
+                // Echo this prompt to the screen of our movie controller in that view.
                 "text" => "Please give a review of {$movie_title} from someone who rated it a {$rating} out of 5."
               )
             )
           )
         )
       );
-
+      // Curl for php.
       $json_data = json_encode($data);
       $ch = curl_init($url);
       curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
