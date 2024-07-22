@@ -7,15 +7,17 @@
   <div class="alert alert-danger"><?= htmlspecialchars($_SESSION['error']) ?></div>
   <?php unset($_SESSION['error']); ?>
 <?php endif; ?>
-<h1>Search for a Movie</h1>
+<h1 class="text-center">Search for a Movie</h1>
 <?php if (isset($data['error'])): ?>
   <div class="alert alert-danger"><?= htmlspecialchars($data['error'])?></div>
 <?php endif; ?>
 <form action="/movie/search" method="POST">
   <div class="form-group">
-    <input name="movie" class="form-control" type="text" required>
+    <input name="movie" class="form-control" type="text" placeholder="Movie Name" required>
   </div>
   <br>
-  <button type="submit" class="btn btn-dark">Search</button>
+  <div class="text-center">
+    <button type="submit" class="btn btn-dark">Search</button>
+  </div>
 </form>
 <?php require_once 'app/views/templates/footer.php'?>

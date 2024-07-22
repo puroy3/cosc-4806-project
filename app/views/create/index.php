@@ -52,7 +52,6 @@
       </div>
       <br>
     </form>
-    <p class="text-center"><a href="/login/index"> Login here </a></p>
     </fieldset>
     </form>
   </div>

@@ -1,6 +1,6 @@
 <?php require_once 'app/views/templates/headerMovie.php'?>
 <?php if (isset($data['movie']) && is_array($data['movie'])): ?>
-<h1><?= htmlspecialchars($data['movie']['Title'])?> (<?= htmlspecialchars($data['movie']['Year']) ?>)</h1>
+<h1 class="text-center"><?= htmlspecialchars($data['movie']['Title'])?> (<?= htmlspecialchars($data['movie']['Year']) ?>)</h1>
 <div class="row">
   <div class="col-md-3">
     <img src="<?= htmlspecialchars($data['movie']['Poster'])?>" alt="Movie Poster" class="img-fluid">
@@ -29,9 +29,11 @@
   <?php endif; ?>
   </div>
 </div>
-<h3>User Ratings</h3>
+<h3 class="text-center">User Ratings</h3>
+<div class="container">
+  <div class="row justify-content-center">
 <?php if (!empty($data['user_ratings'])): ?>
-  <ul class="list-group">
+  <ul class="list-group text-center">
     <?php foreach ($data['user_ratings'] as $rating): ?>
       <li class="list-group-item">
         <?= htmlspecialchars($rating['username'])?>: 
@@ -41,9 +43,12 @@
     <?php endforeach; ?>
   </ul>
   <?php else: ?>
-  <p>No user ratings available.</p>
+  <p class="text-center">No user ratings available.</p>
   <?php endif; ?>
+  </div>
+</div>
   <br>
+  <div class="text-center">
   <p>Average User Rating:
   <?php
     if(!empty($data['user_ratings'])) {
@@ -55,41 +60,47 @@
     }
     ?>
   </p>
+  </div>
 <?php if (isset($_SESSION['auth'])): ?>
-<h2>Rate this movie</h2>
+<h2 class="text-center">Rate this movie</h2>
 <form action="/movie/rate" method="POST">
   <input type="hidden" name="movie_name" value="<?= htmlspecialchars($data['movie']['Title'])?>">
-      <select class="form-select" name="rating" required>
-        <option value="">Select rating</option>
+  <div class="btn-group d-flex justify-content-center" aria-label="Movie Rating" role="group">    
+  <?php
+  $ratings = [1 => '⭐☆☆☆☆ (1/5)', 2 => '⭐⭐☆☆☆ (2/5)', 3 => '⭐⭐⭐☆☆ (3/5)', 4 => '⭐⭐⭐⭐☆ (4/5)', 5 => '⭐⭐⭐⭐⭐ (5/5)'];
+  foreach ($ratings as $value => $label):
+  ?>
+    <input type="radio" name="rating" class="btn-check" id="rating<?= $value ?>" value="<?= $value ?>" required>
+    <label class="btn btn-outline-dark" for="rating<?= $value ?>"><?= $label ?></label>
+    <?php endforeach; ?>
+  </div>
+  <br>
+  <div class="text-center">
+  <button type="submit" class="btn btn-dark">Submit Rating</button>
+  </div>
+</form>
+<?php else: ?>
+  <p class="text-center"><a href="/login">Login</a> to rate movies.</p>
+<?php endif; ?>
+<br>
+<h2 class="text-center">Get an AI-generated Review</h2>
+<form action="/movie/review" method="POST">
+    <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>">
+    <div class="form-group">
+      <label for="review-rating">Rating for Review:</label>
+      <select class="form-select" name="rating" id="review-rating" required>
+        <option value="">Select a rating</option>
         <option value="1">⭐☆☆☆☆ (1/5)</option>
         <option value="2">⭐⭐☆☆☆ (2/5)</option>
         <option value="3">⭐⭐⭐☆☆ (3/5)</option>
         <option value="4">⭐⭐⭐⭐☆ (4/5)</option>
         <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
       </select>
-  <br>
-  <button type="submit" class="btn btn-dark">Submit Rating</button>
-</form>
-<?php else: ?>
-  <p><a href="/login">Login</a> to rate movies.</p>
-<?php endif; ?>
-<br>
-<h2>Get an AI-generated Review</h2>
-<form action="/movie/review" method="POST">
-    <input name="movie_name" type="hidden" value="<?= htmlspecialchars($data['movie']['Title'])?>">
-    <div class="form-group">
-      <label for="review-rating">Rating for Review:</label>
-      <select class="form-select" name="rating" id="review-rating" required>
-        <option value="">Select rating</option>
-        <option value="1">1 Star</option>
-        <option value="2">2 Stars</option>
-        <option value="3">3 Stars</option>
-        <option value="4">4 Stars</option>
-        <option value="5">5 Stars</option>
-      </select>
     </div>
     <br>
+    <div class="text-center">
     <button type="submit" class="btn btn-dark">Get a Review</button>
+    </div>
 </form>
   <?php else: ?>
     <p>No data is available for this movie.</p>

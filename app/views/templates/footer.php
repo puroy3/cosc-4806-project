@@ -1,6 +1,7 @@
 <footer class="footer">    
     <div class="row">
         <div class="col-lg-12">
+            <br>
             <p class="text-center">Pushpak Roy Copyright &copy; <?php echo date('Y'); ?> </p>
         </div>
     </div>

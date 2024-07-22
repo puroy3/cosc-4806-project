@@ -44,7 +44,6 @@
 		    <button type="submit" class="btn btn-dark btn-sm">Login</button>
 			</div>
 						<br>
-				<p class="text-center"><a href="/create/index"> Create an Account here </a></p>
 		</fieldset>
 		</form> 
 	</div>
